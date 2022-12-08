@@ -1,31 +1,47 @@
 import React from 'react'
 
+
 class Form extends React.Component {
-  constructor() {
-    super()
-      this.state = {}
-    }
+constructor() {
+  super()
+  this.state = {
+    input: ""
+  }
+}
+  handlesubmit = (evt) => {
+    evt.preventDefault()
+    this.props.add(this.state.input)
+    this.setState({
+      ...this.state,
+      input: "" 
+    })
 
-    submitFunction = props => {
-      console.log(submit)
-     }
-     
-     clearFunction = props => {
-       console.log(clear)
-     }
+  }
 
 
-  render(){
-    return (
+
+  handleChange = (evt) => {
+    this.setState({
+      ...this.state,
+      input: evt.target.value
+    })
+
+  }
+
+  render() {
+    return( 
       <div>
-        <input
-        placeholder='New Todo'
-        name='todoInput'
-        />
-        <button onClick={this.submitFunction}>Add Todo</button>
-        <button onClick={this.clearFunction}>Clear Completed</button>
+          <form>
+          <input
+          onChange={this.handleChange} 
+          value={this.state.input}
+          />
+          <button onClick={this.handlesubmit}>Add</button>
+          </form>
       </div>
     )
   }
+
 }
+
   export default Form 

@@ -1,7 +1,9 @@
 import React from 'react'
-import Form from "./Form"
-import Todo from "./Todo"
 import TodoList from "./TodoList"
+import Form from "./Form"
+
+
+
 
 export default class App extends React.Component {
   constructor() {
@@ -15,35 +17,75 @@ export default class App extends React.Component {
           },
           {
           name: 'Suck Dick',
-          id: 1528817084358,
+          id: 15288170858,
           completed: false
           },
           {
           name: 'Eat Ass',
-          id: 1528817084358,
+          id: 15288170843,
           completed: true
           }
         ]
       }
   }
 
+handleadd = (name) => {
 
- 
+  const newTodo = {
+    name: name,
+    id: Date.now(),
+    completed: false
+  }
+
+  this.setState({
+    ...this.state,
+    todos: [...this.state.todos, newTodo]
+  })
+}
+
+ handletoggle = (clickedId) => {
+  this.setState({
+    ...this.state,
+    todos: this.state.todos.map(todo => {
+      if(todo.id === clickedId){
+        return (
+          {...todo,
+          completed: !todo.completed}
+        )
+      }
+      return todo
+    })
+  })
+ }
+
+ handleClear = () => {
+  //What needs to be done 
+  //1. setState
+  //2. loop through all todos
+  //3.remove all todos that are completed = true
+  //4/ saave filtered todos to state
+  this.setState({
+    ...this.state,
+    todos: this.state.todos.filter(todo => {
+      return todo.completed === false
+      
+    })
+  })
+}
+
 
 render() {
   
   const {todos} = this.state
 
-
-
-
     return (
       <div>
-          <ui>
-            {todos.map(todo => {
-              return <li>{todo.name} { todo.completed ? <span>Comleted</span>: "" }</li>
-            })}
-          </ui>
+
+            <TodoList todos={todos} check={this.handletoggle}/>
+
+            <Form add={this.handleadd} />
+
+            <button onClick={this.handleClear}>Clear</button>
       </div>
     )
   }
