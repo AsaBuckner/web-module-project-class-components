@@ -16,12 +16,12 @@ export default class App extends React.Component {
           completed: false
           },
           {
-          name: 'Suck Dick',
+          name: 'buy sugar',
           id: 15288170858,
           completed: false
           },
           {
-          name: 'Eat Ass',
+          name: 'play games',
           id: 15288170843,
           completed: true
           }
